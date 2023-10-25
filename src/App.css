@@ -1,0 +1,64 @@
+.wrapper
+{
+	width: 50%;
+	margin: 0px auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.result
+{
+	background-color: #111;
+	color: #fff;
+	width: 100%;
+	height: 50px;
+	font-size: 2em;
+	text-align: right;
+	padding: 1em;
+}
+
+.number-btn
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 75%;
+	height: 100px;
+}
+
+.operations-btn
+{
+	display: flex;
+	flex-direction: column;
+	width: 25%;
+	height: 300px;
+}
+
+.calc-button
+{
+	height: 100px;
+	color: #000;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	border: #000 1px solid;
+}
+
+.orange
+{
+	background-color: orange;
+	width: 100%;
+}
+
+.grey
+{
+	background-color: #ccc;
+	width: 33%;
+}
+
+.zero-btn
+{
+	width: 66%;
+}
