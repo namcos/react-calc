@@ -16,6 +16,17 @@ function App()
 	
 	const press = (e) =>
 	{
+		if((e.target.value === "/") || (e.target.value === "X") || (e.target.value === "-") || (e.target.value === "+") || (e.target.value === "="))
+		{
+			e.target.style.color = "#fff";
+			e.target.style.backgroundColor = "orange";
+		}
+		else
+		{
+			e.target.style.color = "#fff";
+			e.target.style.backgroundColor = "#444";
+		}
+		
 		switch(e.target.value)
 		{
 			case "AC":
@@ -33,26 +44,28 @@ function App()
 				{
 					case "X":
 						displayBuff = parseInt(sum1) * parseInt(sum2);
-						setShowResult(displayBuff);
-						operatorSelector = null;
 					break;
 					
 					case "-":
 						displayBuff = parseInt(sum1) - parseInt(sum2);
-						setShowResult(displayBuff);
-						operatorSelector = null;
 					break;
 					
 					case "+":
 						displayBuff = parseInt(sum1) + parseInt(sum2);
-						setShowResult(displayBuff);
-						operatorSelector = null;
+					break;
+					
+					case "/":
+						displayBuff = parseInt(sum1) / parseInt(sum2);
 					break;
 					
 					default:
 					
 					break;
 				}
+				
+				setShowResult(displayBuff);
+				operatorSelector = null;
+				result = [];
 				
 			break;
 			
@@ -80,6 +93,14 @@ function App()
 				operatorSelector = '+';
 			break;
 			
+			case "/":
+				sum1 = showResult;
+				
+				// make result 0
+				result = [];
+				operatorSelector = '/';
+			break;
+			
 			default:
 				const buttonPress = e.target.value;
 				result = [...result, ...buttonPress];
@@ -91,6 +112,20 @@ function App()
 		}
 	}
 	
+	const depress = (e) =>
+	{
+		if((e.target.value === "/") || (e.target.value === "X") || (e.target.value === "-") || (e.target.value === "+") || (e.target.value === "="))
+		{
+			e.target.style.color = "#000";
+			e.target.style.backgroundColor = "orange";
+		}
+		else
+		{
+			e.target.style.color = "#000";
+			e.target.style.backgroundColor = "#ccc";
+		}
+	}
+	
 	
   return (
     <div className="wrapper">
@@ -99,24 +134,24 @@ function App()
 		<div className="number-btn">
 			{
 				topRow.map(
-					(topRow, index) => (<button key={index} className="calc-button grey" value={topRow} onClick={press}>{topRow}</button>))
+					(topRow, index) => (<button key={index} className="calc-button grey" value={topRow} onMouseDown={press} onMouseUp={depress}>{topRow}</button>))
 			}
 			
 			{
 				numbers.map(
-					(numbers, index) => (<button key={index} className="calc-button grey" value={numbers} onClick={press}>{numbers}</button>))
+					(numbers, index) => (<button key={index} className="calc-button grey" value={numbers} onMouseDown={press} onMouseUp={depress}>{numbers}</button>))
 			}
 			
 			{
 				bottomRow.map(
-					(bottomRow, index) => (<button key={index} className={bottomRow === 0 ? "calc-button grey zero-button" : "calc-button grey"} value={bottomRow} onClick={press}>{bottomRow}</button>))
+					(bottomRow, index) => (<button key={index} className={bottomRow === "0" ? "calc-button grey zero-btn" : "calc-button grey"} value={bottomRow} onMouseDown={press} onMouseUp={depress}>{bottomRow}</button>))
 			}
 		</div>
 		
 		<div className="operations-btn">
 			{
 				operators.map(
-					(operators, index) => (<button key={index} className="calc-button orange" value={operators} onClick={press}>{operators}</button>))
+					(operators, index) => (<button key={index} className="calc-button orange" value={operators} onMouseDown={press} onMouseUp={depress}>{operators}</button>))
 			}
 		</div>
 	</div>
